@@ -1,10 +1,12 @@
 apt-get -y update
 apt-get -y upgrade
-apt-get -y install gcc build-essential linux-headers-$(uname -r) nfs-kernel-server zlib1g-dev libssl-dev libreadline-gplv2-dev libyaml-dev curl puppet ssh wget nfs-common
+apt-get -y install gcc build-essential linux-headers-$(uname -r) nfs-kernel-server zlib1g-dev libssl-dev libreadline-gplv2-dev libyaml-dev vim curl puppet ssh wget nfs-common
 apt-get clean
 
 # Tweak sshd to prevent DNS resolution (speed up logins)
 echo 'UseDNS no' >> /etc/ssh/sshd_config
+
+date > /etc/vagrant_box_build_time
 
 cat <<EOF > /etc/default/grub
 # If you change this file, run 'update-grub' afterwards to update

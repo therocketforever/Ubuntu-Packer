@@ -1,5 +1,3 @@
-reboot
-sleep 60
 # Remove items used for building, since they aren't needed anymore
 apt-get -y remove linux-headers-$(uname -r) build-essential
 apt-get -y autoremove
@@ -8,6 +6,11 @@ apt-get -y purge $(dpkg --list |egrep 'linux-image-[0-9]' |awk '{print $3,$2}' |
 apt-get -y clean
 #Clean up tmp
 rm -rf /tmp/*
+
+# Cleanup Virtualbox
+VBOX_VERSION=$(cat .vbox_version)
+VBOX_ISO=VBoxGuestAdditions_$VBOX_VERSION.iso
+rm $VBOX_ISO
 
 # Removing leftover leases and persistent rules
 echo "cleaning up dhcp leases"
